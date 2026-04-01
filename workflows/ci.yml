@@ -1,0 +1,25 @@
+name: Simple CI pipeline
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch: # This adds a manual "Run workflow" button
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run a simple command
+        run: echo "this is devops"
+
+      - name: Step 1
+        run: echo "this is first step"
+
+      - name: Step 2
+        run: echo "this is my second step"
+
+      - name: Breaking pipeline
+        run: echo "Pipeline is fixed"
