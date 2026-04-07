@@ -3,8 +3,7 @@ name: Simple CI pipeline
 on:
   push:
     branches: ["main"]
-  pull_request:
-    branches: ["main"]
+  workflow_dispatch: # This adds a manual "Run workflow" button
 
 jobs:
   build:
@@ -24,6 +23,3 @@ jobs:
 
       - name: Breaking pipeline
         run: echo "Pipeline is fixed"
-  pull-request:
-    branches: ["main"] 
-  
