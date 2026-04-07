@@ -3,7 +3,9 @@ name: Simple CI pipeline
 on:
   push:
     branches: ["main"]
-  workflow_dispatch: # This adds a manual "Run workflow" button
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
 
 jobs:
   build:
