@@ -3,9 +3,8 @@ name: imple CI pipeline
 on:
   push:
     branches: [ "master" ]
-    
   pull_request:
-    branches: [ "master" ]  
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -14,7 +13,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-   
 
     steps:
     - name: Checkout repository
@@ -23,23 +21,17 @@ jobs:
     - name: Run a simple command 
       run: echo "This is my pipeline run"
 
-    - name: step 1
-      run: echo "This is my frist step 1"
+    - name: Step 1
+      run: echo "This is my first step"
 
-    - name: step 2
-      run: echo "This is my second step 2"
+    - name: Step 2
+      run: echo "This is my second step"
 
-    - name: Pipeline Break
-      run: echo "pipeline start again"
-
-    - name: Build Docker Image
-      run: docker build -t devops .
-
-    - name: login to ghcr.io
-      run: echo "${{secrets.GHCR_TOKEN}}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+    - name: Login to GHCR
+      run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
     - name: Build Docker Image
-      run: docker build -t ghcr.io/${{github.actor}}/devops:v1 .
+      run: docker build -t ghcr.io/${{ github.actor }}/devops:v1 .
 
-    - name: Docker push
-      run: docker push ghcr.io/${{github.actor}}/devops:v1     
+    - name: Push Docker Image
+      run: docker push ghcr.io/${{ github.actor }}/devops:v1
