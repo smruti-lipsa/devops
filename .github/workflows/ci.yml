@@ -1,37 +1,42 @@
-name: imple CI pipeline
+name: Simple CI pipeline
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     permissions:
       contents: read
       packages: write
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Run a simple command 
-      run: echo "This is my pipeline run"
+      - name: Run a simple command
+        run: echo "This is my first pipeline run"
 
-    - name: Step 1
-      run: echo "This is my first step"
+      - name: step1
+        run: echo "this is my step1"
 
-    - name: Step 2
-      run: echo "This is my second step"
+      - name: step2
+        run: echo "this is my step2"
 
-    - name: Login to GHCR
-      run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: pipeline break
+        run: echo "pipeline fixed"
 
-    - name: Build Docker Image
-      run: docker build -t ghcr.io/${{ github.actor }}/devops:v1 .
+      - name: Build Docker image
+        run: docker build -t devops .
 
-    - name: Push Docker Image
-      run: docker push ghcr.io/${{ github.actor }}/devops:v1
+      - name: login to ghcr
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: build a docker image
+        run: docker build -t ghcr.io/${{ github.actor }}/devops_demo:v1 .
+
+      - name: docker push
+        run: docker push ghcr.io/${{ github.actor }}/devops_demo:v1
